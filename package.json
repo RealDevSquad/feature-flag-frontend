@@ -12,7 +12,8 @@
     "format:fix": "prettier --write .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -27,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^8.13.0",
     "@typescript-eslint/parser": "^8.13.0",
     "@vitejs/plugin-react": "^4.3.3",
+    "@vitest/coverage-v8": "^2.1.1",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -46,7 +48,7 @@
     "vitest": "^2.1.4"
   },
   "volta": {
-    "node": "20.0.0",
-    "pnpm": "8.0.0"
+    "node": "22.11.0",
+    "pnpm": "9.12.3"
   }
 }
