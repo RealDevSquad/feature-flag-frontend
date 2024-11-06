@@ -12,7 +12,7 @@ export default defineConfig({
     setupFiles: './tests/setup.ts',
     include: ['tests/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     coverage: {
-      provider: 'v8'
+      provider: 'v8',
     },
   },
 });
