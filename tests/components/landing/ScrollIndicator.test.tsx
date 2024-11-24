@@ -10,15 +10,19 @@ describe('ScrollIndicator', () => {
   });
 
   it('scrolls when clicked', () => {
-    const scrollToMock = vi.fn();
-    window.scrollTo = scrollToMock;
+    const scrollIntoViewMock = vi.fn();
+
+    const mockElement = document.createElement('div');
+    mockElement.id = 'what-is-section';
+    mockElement.scrollIntoView = scrollIntoViewMock;
+    document.body.appendChild(mockElement);
 
     const { getByTestId } = render(<ScrollIndicator />);
     fireEvent.click(getByTestId('scroll-indicator'));
-
-    expect(scrollToMock).toHaveBeenCalledWith({
-      top: window.innerHeight,
+    expect(scrollIntoViewMock).toHaveBeenCalledWith({
       behavior: 'smooth',
+      block: 'start',
     });
+    document.body.removeChild(mockElement);
   });
 });
