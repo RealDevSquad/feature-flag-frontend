@@ -4,9 +4,9 @@ export const ScrollIndicator = () => {
   const handleClick = () => {
     const targetElement = document.getElementById('what-is-section');
     if (targetElement) {
-      targetElement.scrollIntoView({ 
+      targetElement.scrollIntoView({
         behavior: 'smooth',
-        block: 'start'
+        block: 'start',
       });
     }
   };

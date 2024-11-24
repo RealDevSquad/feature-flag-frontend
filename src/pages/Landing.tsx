@@ -36,8 +36,8 @@ const Landing = () => {
         </div>
         <ScrollIndicator />
       </motion.div>
-            <motion.section
-        className="bg-gray-50 py-20 scroll-mt-16"
+      <motion.section
+        className="scroll-mt-16 bg-gray-50 py-20"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
