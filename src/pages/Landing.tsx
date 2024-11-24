@@ -36,12 +36,13 @@ const Landing = () => {
         </div>
         <ScrollIndicator />
       </motion.div>
-      <motion.section
-        className="bg-gray-50 py-20"
+            <motion.section
+        className="bg-gray-50 py-20 scroll-mt-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
+        id="what-is-section"
         data-testid="what-is-section"
       >
         <div className="mx-auto max-w-4xl space-y-16 px-4">

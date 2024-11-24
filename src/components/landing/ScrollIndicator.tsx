@@ -1,8 +1,15 @@
 import { motion } from 'framer-motion';
 
 export const ScrollIndicator = () => {
-  const handleClick = () =>
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+  const handleClick = () => {
+    const targetElement = document.getElementById('what-is-section');
+    if (targetElement) {
+      targetElement.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   return (
     <motion.div
