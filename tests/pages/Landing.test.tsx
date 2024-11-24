@@ -2,39 +2,43 @@ import { render, screen } from '@testing-library/react';
 import Landing from '../../src/pages/Landing';
 import { describe, it, expect } from 'vitest';
 
-// Mock framer-motion to avoid animation-related issues in tests
-vi.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    section: ({ children, ...props }: any) => <section {...props}>{children}</section>,
-    footer: ({ children, ...props }: any) => <footer {...props}>{children}</footer>,
-  },
-}));
-
 describe('Landing Page', () => {
-  it('renders the main sections', () => {
+  it('renders main sections and content', () => {
     render(<Landing />);
-    
-    expect(screen.getByText('Welcome to Feature-Flag')).toBeInTheDocument();
-    expect(screen.getAllByText())
+
+    expect(screen.getByTestId('hero-section')).toBeInTheDocument();
+    expect(screen.getByTestId('hero-title')).toHaveTextContent(
+      'Welcome to Feature-Flag',
+    );
     expect(screen.getByAltText('RDS Logo')).toBeInTheDocument();
 
-    expect(screen.getByText('What are Feature Flags?')).toBeInTheDocument();
-    expect(screen.getByText('Why Use Feature Flags?')).toBeInTheDocument();
-    
-    expect(screen.getByText('Key Features')).toBeInTheDocument();
-    expect(screen.getByText('Progressive Rollouts')).toBeInTheDocument();
-    expect(screen.getByText('A/B Testing')).toBeInTheDocument();
-    
-    expect(screen.getByText(/open sourced/i)).toBeInTheDocument();
-    expect(screen.getByText('repo')).toHaveAttribute('href', 'https://github.com/Real-Dev-Squad/feature-flag-frontend');
+    expect(screen.getByTestId('what-is-section')).toBeInTheDocument();
+    expect(screen.getByTestId('why-use-section')).toBeInTheDocument();
+
+    expect(screen.getByTestId('features-section')).toBeInTheDocument();
+    expect(screen.getByTestId('features-grid')).toBeInTheDocument();
+
+    expect(screen.getByTestId('footer')).toBeInTheDocument();
+    expect(screen.getByTestId('repo-link')).toHaveAttribute(
+      'href',
+      'https://github.com/Real-Dev-Squad/feature-flag-frontend',
+    );
+  });
+
+  it('renders all feature cards', () => {
+    render(<Landing />);
+    const featureCards = screen.getAllByTestId(/^feature-card-/);
+    expect(featureCards).toHaveLength(4);
   });
 
   it('has proper accessibility attributes', () => {
     render(<Landing />);
-    
     expect(screen.getByRole('main')).toBeInTheDocument();
-    expect(screen.getByRole('banner')).toBeInTheDocument();
-    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('Created by Real Dev Squad'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('Benefits of using feature flags'),
+    ).toBeInTheDocument();
   });
-}); 
+});
