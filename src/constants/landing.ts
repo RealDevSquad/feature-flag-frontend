@@ -25,11 +25,11 @@ export const REPO_URL =
   'https://github.com/Real-Dev-Squad/feature-flag-frontend';
 
 export const WHAT_IS_FEATURE_FLAG =
-  'Feature flags are toggles that allow you to modify system behavior without changing code. They enable teams to control feature rollouts, conduct experiments, and manage their software with greater flexibility.';
+  'Feature flags are a software development tool that allow you to enable or disable a feature without modifying the source code or performing a new deployment.';
 
 export const WHY_USE_FEATURE_FLAGS = [
-  'Separate code deployment from feature release',
-  'Reduce risk in production deployments',
-  'Enable trunk-based development',
-  'Facilitate continuous delivery',
+  'Test new features safely in production',
+  'Control feature access for specific users or groups',
+  'Quick rollback without code deployment',
+  'Easier A/B testing and experimentation',
 ];

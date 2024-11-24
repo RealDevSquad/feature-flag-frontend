@@ -11,7 +11,7 @@ const Landing = () => {
   return (
     <main className="min-h-screen bg-white" role="main">
       <motion.div
-        className="relative flex min-h-[calc(100vh-64px)] flex-col items-center justify-center px-4 text-center"
+        className="relative z-0 flex min-h-[calc(100vh-64px)] flex-col items-center justify-center px-4 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}

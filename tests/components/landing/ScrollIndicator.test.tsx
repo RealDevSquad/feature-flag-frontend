@@ -2,7 +2,6 @@ import { render, fireEvent } from '@testing-library/react';
 import { ScrollIndicator } from '../../../src/components/landing/ScrollIndicator';
 import { describe, it, expect, vi } from 'vitest';
 
-
 describe('ScrollIndicator', () => {
   it('renders with correct attributes', () => {
     const { getByTestId } = render(<ScrollIndicator />);
