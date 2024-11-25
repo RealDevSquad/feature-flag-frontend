@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev:server": "vite --port 4000",
+    "dev:reverse-ssl": "local-ssl-proxy --source 443 --target 4000",
+    "dev": "run-p dev:*",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -16,9 +18,12 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "framer-motion": "^11.11.17",
+    "install": "^0.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
     "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
@@ -46,6 +51,8 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
     "jsdom": "^25.0.1",
+    "local-ssl-proxy": "^2.0.5",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
