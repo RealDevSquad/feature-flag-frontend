@@ -12,16 +12,31 @@ export interface FeatureFlag {
   updatedBy: string;
 }
 
+interface ApiResponse<T> {
+  message: string;
+  data: T;
+}
+
 const apiClient = axios.create({
   baseURL: getConfig().rdsBackendBaseUrl,
   headers: {
     'Content-Type': 'application/json',
-    credentials: 'include',
   },
   withCredentials: true,
 });
 
-export const getAllFeatureFlags = async () => {
-  const response = await apiClient.get<{data: FeatureFlag[]}>('/feature-flag/getAllFeatureFlags');
-  return response.data.data;
+export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
+  try {
+    const response = await apiClient.get<ApiResponse<FeatureFlag[]>>(
+      '/feature-flag/getAllFeatureFlags',
+    );
+    return response.data.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message || 'Failed to fetch feature flags',
+      );
+    }
+    throw error;
+  }
 };

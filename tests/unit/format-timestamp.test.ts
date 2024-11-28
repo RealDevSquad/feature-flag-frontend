@@ -7,4 +7,4 @@ describe('formatTimestamp', () => {
 
     expect(formattedDate).toBe('June 12, 2024 at 02:42 AM');
   });
-}); 
+});

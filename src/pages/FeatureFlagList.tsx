@@ -14,11 +14,13 @@ const FeatureFlagList: React.FC = () => {
     const fetchFeatureFlags = async () => {
       try {
         setIsLoading(true);
+        setError(null);
         const data = await getAllFeatureFlags();
         setFeatureFlags(data);
-        setError(null);
       } catch (err) {
-        setError('Failed to fetch feature flags');
+        setError(
+          err instanceof Error ? err.message : 'Failed to fetch feature flags',
+        );
       } finally {
         setIsLoading(false);
       }
@@ -33,24 +35,26 @@ const FeatureFlagList: React.FC = () => {
 
   return (
     <div className="container mx-auto mt-20 px-4">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Feature Flags</h1>
+      <div className="mb-12 text-center">
+        <h1 className="mb-2 text-4xl font-bold text-gray-900">Feature Flags</h1>
       </div>
-      
+
       {error && (
-        <div className="text-center text-red-600 mb-8 p-4 bg-red-50 rounded-lg">
+        <div className="mb-8 rounded-lg bg-red-50 p-4 text-center text-red-600">
           {error}
         </div>
       )}
 
       {isLoading ? (
-        <Spinner />
+        <div className="flex justify-center">
+          <Spinner />
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {featureFlags.map((flag) => (
-            <FeatureFlagCard 
-              key={flag.id} 
-              flag={flag} 
+            <FeatureFlagCard
+              key={flag.id}
+              flag={flag}
               onCardClick={handleCardClick}
             />
           ))}
