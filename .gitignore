@@ -23,5 +23,13 @@ dist-ssr
 *.sln
 *.sw?
 
+.env
+
 # Coverage directory used by tools like istanbul
 coverage
+
+# TypeScript
+*.tsbuildinfo
+
+vite.config.js
+vite.config.d.ts
