@@ -1,3 +1,4 @@
+
 # Feature Flag Project
 
 ## Overview
@@ -23,7 +24,7 @@ To use this project locally, follow these steps:
 
 2. **Install dependencies**:
    ```bash
-    pnpm install
+   pnpm install
    ```
 
 ### Running the Project
@@ -31,7 +32,7 @@ To use this project locally, follow these steps:
 To run the project locally, use the following command:
 
 ```bash
-    pnpm dev
+pnpm dev
 ```
 
 This will start the development server, and you can access the application at `http://localhost:5173/`.
@@ -41,7 +42,7 @@ This will start the development server, and you can access the application at `h
 To run the tests for this project, use the following command:
 
 ```bash
-    pnpm test
+pnpm test
 ```
 
 ## Linting and Formatting
@@ -50,22 +51,22 @@ To maintain code quality and consistency, we use linting and formatting tools. H
 
 - **Linting**: To check for code quality issues, run:
   ```bash
-    pnpm lint
+  pnpm lint
   ```
 
-  To fix the lint 
+  To fix linting issues, run:
   ```bash
-    pnpm lint:fix
+  pnpm lint:fix
   ```
 
 - **Formatting**: To format the code according to our style guidelines, run:
   ```bash
-    pnpm format
+  pnpm format
   ```
 
-  To fix the format 
+  To fix formatting issues, run:
   ```bash
-    pnpm format:fix
+  pnpm format:fix
   ```
 
 ## Accessibility Considerations
@@ -76,5 +77,5 @@ We are committed to making our site ally-friendly. This means that as we build p
 
 We emphasize the importance of testing in our development process. Here are some key points regarding our testing strategy:
 
-- **Unit Tests**: We write unit tests for all new features to ensure that individual components as expected.
-- **Integration Tests**: Integration tests are implemented to verify that different parts of the application work together correctly. (We write it for pages).
+- **Unit Tests**: We write unit tests for all new features to ensure that individual components function as expected.
+- **Integration Tests**: Integration tests are implemented to verify that different parts of the application work together correctly. (We write them for pages).
