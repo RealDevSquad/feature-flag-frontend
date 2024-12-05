@@ -28,12 +28,14 @@ describe('ScrollIndicator', () => {
 
   it('handles missing scroll target element gracefully', () => {
     const scrollIntoViewMock = vi.fn();
-    const getElementByIdSpy = vi.spyOn(document, 'getElementById').mockReturnValue(null);
+    const getElementByIdSpy = vi
+      .spyOn(document, 'getElementById')
+      .mockReturnValue(null);
 
     const { getByTestId } = render(<ScrollIndicator />);
     fireEvent.click(getByTestId('scroll-indicator'));
     expect(scrollIntoViewMock).not.toHaveBeenCalled();
-    
+
     getElementByIdSpy.mockRestore();
   });
 });
