@@ -12,6 +12,7 @@ const config: Config = {
   membersSiteUrl: import.meta.env.VITE_REACT_MEMBERS_SITE_URL,
   statusSiteUrl: import.meta.env.VITE_REACT_STATUS_SITE_URL,
   rdsBackendBaseUrl: import.meta.env.VITE_REACT_RDS_BACKEND_BASE_URL,
+  featureFlagBaseUrl: import.meta.env.VITE_REACT_FEATURE_FLAG_BASE_URL,
 };
 
 export const getConfig = () => {
@@ -24,6 +25,8 @@ export const validateEnv = () => {
     'welcomeSiteUrl',
     'membersSiteUrl',
     'statusSiteUrl',
+    'rdsBackendBaseUrl',
+    'featureFlagBaseUrl',
   ];
   for (const key of requiredVars) {
     if (!config[key]) {
