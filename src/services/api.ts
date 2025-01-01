@@ -18,11 +18,6 @@ export const fetchData = async (url: string) => {
   return response;
 };
 
-const handleError = (error: unknown): Error => {
-  console.error(error);
-  return new Error('Failed to fetch feature flags');
-};
-
 export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
   try {
     const baseUrl = getConfig().featureFlagBaseUrl;
@@ -38,6 +33,6 @@ export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
     const data = await response.json();
     return data;
   } catch (error) {
-    throw handleError(error);
+    throw new Error('Failed to fetch feature flags');
   }
 };
