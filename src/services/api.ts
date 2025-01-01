@@ -19,14 +19,27 @@ export const fetchData = async (url: string, options?: RequestInit) => {
   return response;
 };
 
+const handleError = (error: unknown): Error => {
+  console.error(error);
+  return new Error('Failed to fetch feature flags');
+};
+
 export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
   try {
     const baseUrl = getConfig().featureFlagBaseUrl;
-    const response = await fetchData(`${baseUrl}/feature-flags`);
+    const response = await fetch(`${baseUrl}/feature-flags`);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || 'Failed to fetch feature flags'
+      );
+    }
+
     const data = await response.json();
     return data;
   } catch (error) {
-    throw new Error('Failed to fetch feature flags');
+    throw handleError(error);
   }
 };
 
