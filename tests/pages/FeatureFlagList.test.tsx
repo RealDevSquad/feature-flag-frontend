@@ -79,4 +79,17 @@ describe('FeatureFlagList', () => {
 
     expect(mockNavigate).toHaveBeenCalledWith('/featureFlag/1');
   });
+
+  it('opens modal when Add Feature Flag button is clicked', async () => {
+    renderComponent();
+
+    await waitFor(() => {
+      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+    });
+
+    const addButton = screen.getByLabelText('Add feature flag');
+    await userEvent.click(addButton);
+
+    expect(screen.getByText('Create a Feature Flag')).toBeInTheDocument();
+  });
 });
