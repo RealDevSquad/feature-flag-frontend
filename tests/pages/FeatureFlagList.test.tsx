@@ -5,10 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/server';
 import FeatureFlagList from '../../src/pages/FeatureFlagList';
+// import { getAllFeatureFlags } from '../../src/services/api';
 
 vi.mock('../../src/config', () => ({
   getConfig: () => ({
-    rdsBackendBaseUrl: 'http://localhost:8000',
+    featureFlagBaseUrl: 'http://localhost:8000',
   }),
 }));
 
@@ -50,7 +51,7 @@ describe('FeatureFlagList', () => {
 
   it('displays error message when API call fails', async () => {
     server.use(
-      http.get('http://localhost:8000/feature-flag/getAllFeatureFlags', () => {
+      http.get('http://localhost:8000/feature-flags', () => {
         return HttpResponse.json(
           { message: 'Failed to fetch feature flags' },
           { status: 500 },

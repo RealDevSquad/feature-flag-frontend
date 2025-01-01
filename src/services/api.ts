@@ -1,5 +1,4 @@
 import { getConfig } from '../config';
-import axios from 'axios';
 
 export interface FeatureFlag {
   id: string;
@@ -19,19 +18,26 @@ export const fetchData = async (url: string) => {
   return response;
 };
 
+const handleError = (error: unknown): Error => {
+  console.error(error);
+  return new Error('Failed to fetch feature flags');
+};
+
 export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
   try {
     const baseUrl = getConfig().featureFlagBaseUrl;
-    const response = await fetchData(`${baseUrl}/feature-flags`);
-    const data = await response.json();
+    const response = await fetch(`${baseUrl}/feature-flags`);
 
-    return data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
+    if (!response.ok) {
+      const errorData = await response.json();
       throw new Error(
-        error.response?.data?.message || 'Failed to fetch feature flags',
+        errorData.message || 'Failed to fetch feature flags'
       );
     }
-    throw error as Error;
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw handleError(error);
   }
 };
