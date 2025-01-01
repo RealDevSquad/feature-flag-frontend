@@ -51,7 +51,7 @@ const FeatureFlagList: React.FC = () => {
       <div className="mb-12 flex justify-end">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-primary text-white px-4 py-2 rounded flex items-center"
+          className="bg-primary text-white px-4 py-2 rounded flex items-center hover:bg-primary-dark  hover:shadow-lg"
           aria-label="Add feature flag"
         >
           <FaPlus className="mr-2" />

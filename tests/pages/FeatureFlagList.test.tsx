@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/server';
 import FeatureFlagList from '../../src/pages/FeatureFlagList';
-// import { getAllFeatureFlags } from '../../src/services/api';
 
 vi.mock('../../src/config', () => ({
   getConfig: () => ({

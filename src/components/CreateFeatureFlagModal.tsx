@@ -1,22 +1,33 @@
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import Spinner from '../components/Spinner';
+import { toast } from 'react-hot-toast';
 
 interface CreateFeatureFlagModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onCreate: (name: string, description: string) => void;
+  onCreate: (name: string, description: string) => Promise<void>;
 }
 
 const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen, onClose, onCreate }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onCreate(name, description);
-    setName('');
-    setDescription('');
-    onClose();
+    setLoading(true);
+    try {
+      await onCreate(name, description);
+      setName('');
+      setDescription('');
+      toast.success('Feature flag created!');
+      onClose();
+    } catch (error) {
+      toast.error('Failed to create feature flag. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -25,7 +36,7 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" role="dialog" aria-modal="true">
-      <div className="bg-white rounded-lg shadow-lg p-6 relative max-w-lg w-full">
+      <div className="bg-white rounded-lg shadow-lg p-6 relative max-w-lg w-full mx-4 sm:mx-0">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
@@ -44,7 +55,7 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-primary"
               required
               aria-required="true"
             />
@@ -58,22 +69,33 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-primary"
               required
               aria-required="true"
             />
           </div>
           <div className="flex justify-end">
-            <button type="button" onClick={onClose} className="bg-gray-300 px-4 py-2 rounded mr-2" aria-label="Cancel">
+            <button
+              type="button"
+              onClick={onClose}
+              className="bg-gray-300 px-4 py-2 rounded mr-2 hover:bg-gray-400 hover:shadow-lg"
+              aria-label="Cancel"
+            >
               Cancel
             </button>
             <button
               type="submit"
-              className={`bg-primary text-white px-4 py-2 rounded ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-primary text-white px-4 py-2 rounded flex items-center justify-center ${!isFormValid || loading ? 'opacity-50 cursor-not-allowed' : ''} hover:bg-primary-dark hover:shadow-lg`}
               aria-label="Create feature flag"
-              disabled={!isFormValid}
+              disabled={!isFormValid || loading}
             >
-              Create
+              {loading ? (
+                <span className="flex items-center">
+                  <Spinner className="mr-2" color="white" />
+                </span>
+              ) : (
+                'Create'
+              )}
             </button>
           </div>
         </form>
