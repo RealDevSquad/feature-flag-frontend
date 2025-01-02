@@ -9,7 +9,11 @@ interface CreateFeatureFlagModalProps {
   onCreate: (name: string, description: string) => Promise<void>;
 }
 
-const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen, onClose, onCreate }) => {
+const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({
+  isOpen,
+  onClose,
+  onCreate,
+}) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,6 +28,7 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
       toast.success('Feature flag created!');
       onClose();
     } catch (error) {
+      console.error(error);
       toast.error('Failed to create feature flag. Please try again.');
     } finally {
       setLoading(false);
@@ -35,19 +40,23 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
   const isFormValid = name.trim() !== '' && description.trim() !== '';
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" role="dialog" aria-modal="true">
-      <div className="bg-white rounded-lg shadow-lg p-6 relative max-w-lg w-full mx-4 sm:mx-0">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="relative mx-4 w-full max-w-lg rounded-lg bg-white p-6 shadow-lg sm:mx-0">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+          className="absolute right-2 top-2 text-gray-600 hover:text-gray-900"
           aria-label="Close modal"
         >
           <FaTimes size={20} />
         </button>
-        <h2 className="text-xl font-bold mb-4">Create a Feature Flag</h2>
+        <h2 className="mb-4 text-xl font-bold">Create a Feature Flag</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block mb-2" htmlFor="name">
+            <label className="mb-2 block" htmlFor="name">
               Name: <span className="text-red-500">*</span>
             </label>
             <input
@@ -55,13 +64,13 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full rounded border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
               required
               aria-required="true"
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-2" htmlFor="description">
+            <label className="mb-2 block" htmlFor="description">
               Description: <span className="text-red-500">*</span>
             </label>
             <input
@@ -69,7 +78,7 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full rounded border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
               required
               aria-required="true"
             />
@@ -78,14 +87,14 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
             <button
               type="button"
               onClick={onClose}
-              className="bg-gray-300 px-4 py-2 rounded mr-2 hover:bg-gray-400 hover:shadow-lg"
+              className="mr-2 rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 hover:shadow-lg"
               aria-label="Cancel"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className={`bg-primary text-white px-4 py-2 rounded flex items-center justify-center ${!isFormValid || loading ? 'opacity-50 cursor-not-allowed' : ''} hover:bg-primary-dark hover:shadow-lg`}
+              className={`flex items-center justify-center rounded bg-primary px-4 py-2 text-white ${!isFormValid || loading ? 'cursor-not-allowed opacity-50' : ''} hover:bg-primary-dark hover:shadow-lg`}
               aria-label="Create feature flag"
               disabled={!isFormValid || loading}
             >
@@ -104,4 +113,4 @@ const CreateFeatureFlagModal: React.FC<CreateFeatureFlagModalProps> = ({ isOpen,
   );
 };
 
-export default CreateFeatureFlagModal; 
+export default CreateFeatureFlagModal;

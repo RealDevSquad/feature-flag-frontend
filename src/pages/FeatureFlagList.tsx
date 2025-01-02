@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import FeatureFlagCard from '../components/FeatureFlagCard';
 import Spinner from '../components/Spinner';
 import CreateFeatureFlagModal from '../components/CreateFeatureFlagModal';
-import { getAllFeatureFlags, createFeatureFlag, FeatureFlag } from '../services/api';
+import {
+  getAllFeatureFlags,
+  createFeatureFlag,
+  FeatureFlag,
+} from '../services/api';
 import { FaPlus } from 'react-icons/fa';
 
 const FeatureFlagList: React.FC = () => {
@@ -42,13 +46,15 @@ const FeatureFlagList: React.FC = () => {
       const body = {
         Name: name,
         Description: description,
-        UserId: userId
-      }
+        UserId: userId,
+      };
       await createFeatureFlag(body);
       const updatedFlags = await getAllFeatureFlags();
       setFeatureFlags(updatedFlags);
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Failed to create feature flag');
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : 'Failed to create feature flag',
+      );
     }
   };
 
@@ -57,7 +63,7 @@ const FeatureFlagList: React.FC = () => {
       <div className="mb-12 flex justify-end">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-primary text-white px-4 py-2 rounded flex items-center hover:bg-primary-dark  hover:shadow-lg"
+          className="flex items-center rounded bg-primary px-4 py-2 text-white hover:bg-primary-dark hover:shadow-lg"
           aria-label="Add feature flag"
         >
           <FaPlus className="mr-2" />

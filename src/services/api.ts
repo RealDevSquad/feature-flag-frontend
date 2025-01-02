@@ -12,17 +12,20 @@ export interface FeatureFlag {
 }
 
 type CreateFeatureFlagBody = {
-  Name: string,
-  Description: string,
-  UserId: string,
-}
+  Name: string;
+  Description: string;
+  UserId: string;
+};
 
-export const fetchData = async (url: string, options?: RequestInit) => {
+export const fetchData = async (
+  url: string,
+  options?: globalThis.RequestInit,
+) => {
   const response = await fetch(url, {
     credentials: 'include',
     ...options,
   });
-  
+
   return response;
 };
 
@@ -39,11 +42,12 @@ export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
     const data = await response.json();
     return data;
   } catch (error) {
+    console.error(error);
     throw new Error('Failed to fetch feature flags');
   }
 };
 
-export const createFeatureFlag = async (body: CreateFeatureFlagBody ) => {
+export const createFeatureFlag = async (body: CreateFeatureFlagBody) => {
   const baseUrl = getConfig().featureFlagBaseUrl;
 
   const response = await fetchData(`${baseUrl}/feature-flags`, {
