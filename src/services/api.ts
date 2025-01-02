@@ -21,7 +21,7 @@ export const fetchData = async (url: string) => {
 export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
   try {
     const baseUrl = getConfig().featureFlagBaseUrl;
-    const response = await fetch(`${baseUrl}/feature-flags`);
+    const response = await fetchData(`${baseUrl}/feature-flags`);
 
     if (!response.ok) {
       const errorData = await response.json();
