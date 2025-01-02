@@ -13,7 +13,7 @@ export interface FeatureFlag {
 
 export const fetchData = async (url: string) => {
   const response = await fetch(url, {
-    credentials: 'include'
+    credentials: 'include',
   });
   return response;
 };
@@ -25,9 +25,7 @@ export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(
-        errorData.message || 'Failed to fetch feature flags'
-      );
+      throw new Error(errorData.message || 'Failed to fetch feature flags');
     }
 
     const data = await response.json();
