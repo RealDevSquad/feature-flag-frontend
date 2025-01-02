@@ -11,18 +11,25 @@ export interface FeatureFlag {
   updatedBy: string;
 }
 
+type CreateFeatureFlagBody = {
+  Name: string,
+  Description: string,
+  UserId: string,
+}
+
 export const fetchData = async (url: string, options?: RequestInit) => {
   const response = await fetch(url, {
     credentials: 'include',
     ...options,
   });
+  
   return response;
 };
 
 export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
   try {
     const baseUrl = getConfig().featureFlagBaseUrl;
-    const response = await fetch(`${baseUrl}/feature-flags`);
+    const response = await fetchData(`${baseUrl}/feature-flags`);
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -38,24 +45,20 @@ export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
   }
 };
 
-export const createFeatureFlag = async (name: string, description: string) => {
+export const createFeatureFlag = async (body: CreateFeatureFlagBody ) => {
   const baseUrl = getConfig().featureFlagBaseUrl;
-  const userId = '';
 
   const response = await fetchData(`${baseUrl}/feature-flags`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      Name: name,
-      Description: description,
-      UserId: userId,
-    }),
+    body: JSON.stringify(body),
   });
 
   if (!response.ok) {
-    throw new Error('Failed to create feature flag');
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Failed to create feature flag');
   }
 
   return await response.json();

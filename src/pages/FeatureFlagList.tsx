@@ -38,7 +38,13 @@ const FeatureFlagList: React.FC = () => {
 
   const handleCreateFlag = async (name: string, description: string) => {
     try {
-      await createFeatureFlag(name, description);
+      const userId = '';
+      const body = {
+        Name: name,
+        Description: description,
+        UserId: userId
+      }
+      await createFeatureFlag(body);
       const updatedFlags = await getAllFeatureFlags();
       setFeatureFlags(updatedFlags);
     } catch (error) {
