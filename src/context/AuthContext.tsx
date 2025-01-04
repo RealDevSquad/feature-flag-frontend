@@ -6,7 +6,7 @@ import {
   AUTHENTICATION_FAILED_MESSAGE,
   SIGN_OUT_FAILED_MESSAGE,
   USE_AUTH_ERROR_MESSAGE,
-} from '../constants/appConstants'; // Import constants
+} from '../constants/appConstants';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
