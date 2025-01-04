@@ -25,6 +25,8 @@ dist-ssr
 *.sln
 *.sw?
 
+.env
+
 # Coverage directory used by tools like istanbul
 coverage
 

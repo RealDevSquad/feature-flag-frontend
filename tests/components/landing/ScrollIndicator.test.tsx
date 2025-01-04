@@ -25,4 +25,17 @@ describe('ScrollIndicator', () => {
     });
     document.body.removeChild(mockElement);
   });
+
+  it('handles missing scroll target element gracefully', () => {
+    const scrollIntoViewMock = vi.fn();
+    const getElementByIdSpy = vi
+      .spyOn(document, 'getElementById')
+      .mockReturnValue(null);
+
+    const { getByTestId } = render(<ScrollIndicator />);
+    fireEvent.click(getByTestId('scroll-indicator'));
+    expect(scrollIntoViewMock).not.toHaveBeenCalled();
+
+    getElementByIdSpy.mockRestore();
+  });
 });

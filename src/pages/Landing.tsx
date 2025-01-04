@@ -6,6 +6,12 @@ import {
   WHY_USE_FEATURE_FLAGS,
 } from '../constants/landing';
 import { ScrollIndicator } from '../components/landing/ScrollIndicator';
+import { fadeInViewportAnimation } from '../utils/animations';
+
+interface Feature {
+  title: string;
+  description: string;
+}
 
 const Landing = () => {
   return (
@@ -38,10 +44,7 @@ const Landing = () => {
       </motion.div>
       <motion.section
         className="scroll-mt-16 bg-gray-50 py-20"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
+        {...fadeInViewportAnimation}
         id="what-is-section"
         data-testid="what-is-section"
       >
@@ -67,7 +70,7 @@ const Landing = () => {
               className="list-inside list-disc space-y-3 text-lg text-gray-600"
               aria-label="Benefits of using feature flags"
             >
-              {WHY_USE_FEATURE_FLAGS.map((item) => (
+              {WHY_USE_FEATURE_FLAGS.map((item: string) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -76,10 +79,7 @@ const Landing = () => {
       </motion.section>
       <motion.section
         className="py-20"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
+        {...fadeInViewportAnimation}
         data-testid="features-section"
       >
         <div className="mx-auto max-w-4xl px-4">
@@ -90,7 +90,7 @@ const Landing = () => {
             className="grid gap-8 md:grid-cols-2"
             data-testid="features-grid"
           >
-            {FEATURES.map((feature, index) => (
+            {FEATURES.map((feature: Feature, index) => (
               <motion.div
                 key={feature.title}
                 className="rounded-lg border border-gray-100 bg-white p-6 shadow-lg transition-all hover:shadow-xl"
@@ -111,10 +111,7 @@ const Landing = () => {
       </motion.section>
       <motion.footer
         className="bg-gradient-to-r from-primary to-primary-light py-12 text-white"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
+        {...fadeInViewportAnimation}
         role="contentinfo"
         data-testid="footer"
       >
