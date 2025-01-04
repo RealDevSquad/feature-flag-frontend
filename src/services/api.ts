@@ -41,8 +41,8 @@ export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
 
     const data = await response.json();
     return data;
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     throw new Error('Failed to fetch feature flags');
   }
 };
