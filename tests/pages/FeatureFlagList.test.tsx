@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/server';
 import FeatureFlagList from '../../src/pages/FeatureFlagList';
-// import { getAllFeatureFlags } from '../../src/services/api';
 
 vi.mock('../../src/config', () => ({
   getConfig: () => ({
@@ -79,5 +78,18 @@ describe('FeatureFlagList', () => {
     await userEvent.click(flagCard);
 
     expect(mockNavigate).toHaveBeenCalledWith('/featureFlag/1');
+  });
+
+  it('opens modal when Add Feature Flag button is clicked', async () => {
+    renderComponent();
+
+    await waitFor(() => {
+      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+    });
+
+    const addButton = screen.getByLabelText('Add feature flag');
+    await userEvent.click(addButton);
+
+    expect(screen.getByText('Create a Feature Flag')).toBeInTheDocument();
   });
 });
