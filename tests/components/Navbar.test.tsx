@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Navbar from '../../src/components/navbar';
+import Navbar from '../../src/components/Navbar';
 import { describe, it, expect, vi } from 'vitest';
 
 vi.mock('../../src/config', () => ({
