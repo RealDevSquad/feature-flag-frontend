@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FeatureFlagList from './pages/FeatureFlagList';
 import FeatureFlagDetails from './pages/FeatureFlagDetails';
