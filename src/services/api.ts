@@ -1,3 +1,4 @@
+import { FeatureFlag } from '../types/featureFlag';
 import { getConfig } from '../config';
 
 const { rdsBackendBaseUrl } = getConfig();
@@ -25,4 +26,22 @@ export const signOut = async () => {
     throw new Error('Failed to sign out');
   }
   return response.json();
+};
+
+export const getAllFeatureFlags = async (): Promise<FeatureFlag[]> => {
+  try {
+    const baseUrl = getConfig().featureFlagBaseUrl;
+    const response = await fetchData(`${baseUrl}/feature-flags`);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to fetch feature flags');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw new Error('Failed to fetch feature flags');
+  }
 };
