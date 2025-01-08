@@ -13,6 +13,7 @@ const config: Config = {
   statusSiteUrl: import.meta.env.VITE_REACT_STATUS_SITE_URL,
   rdsBackendBaseUrl: import.meta.env.VITE_REACT_RDS_BACKEND_BASE_URL,
   featureFlagBaseUrl: import.meta.env.VITE_REACT_FEATURE_FLAG_BASE_URL,
+  featureFlagUrl: import.meta.env.VITE_REACT_FEATUREFLAG_SITE_URL,
 };
 
 export const getConfig = () => {

@@ -1,17 +1,36 @@
-import React, { useEffect } from 'react';
-import { getConfig, validateEnv } from '../config';
+import React, { useState } from 'react';
+import { getConfig } from '../config';
+import { useAuth } from '../context/AuthContext';
+import Dropdown from './Dropdown';
+import { signInUrl } from '../services/api';
 import RDSLogo from '../assets/rds-logo.svg';
+import GITHUB_LOGO from '../assets/github-white.png';
+import DEFAULT_AVATAR from '../assets/user.png';
+import { FaChevronDown } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const { welcomeSiteUrl, membersSiteUrl, statusSiteUrl } = getConfig();
+  const { user, signout } = useAuth();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect(() => {
+  const handleSignIn = () => {
+    window.location.href = signInUrl;
+    navigate('/featureFlag');
+  };
+
+  const handleSignOut = async () => {
     try {
-      validateEnv();
+      await signout();
+      setDropdownOpen(false);
     } catch (error) {
-      console.error('Environment validation error:', error);
+      console.error('Sign out error:', error);
     }
-  }, []);
+  };
+
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+  const handleCloseDropdown = () => setDropdownOpen(false);
 
   return (
     <nav
@@ -62,14 +81,52 @@ const Navbar: React.FC = () => {
           </a>
         </div>
 
-        <div className="ml-auto">
-          <button
-            className="rounded bg-secondary px-4 py-2 text-white hover:bg-accent"
-            aria-label="Sign In"
-            data-testid="navbar-signin-btn"
-          >
-            Sign In
-          </button>
+        <div className="relative ml-auto">
+          {!user ? (
+            <button
+              onClick={handleSignIn}
+              className="flex items-center rounded-lg border-2 border-white bg-transparent px-4 py-2 text-base text-white transition-shadow duration-200 hover:shadow-lg"
+              aria-label="Sign In"
+              data-testid="navbar-signin-btn"
+            >
+              Sign in with GitHub
+              <img
+                src={GITHUB_LOGO}
+                alt="GitHub Icon"
+                height="20px"
+                width="20px"
+                className="ml-2"
+              />
+            </button>
+          ) : (
+            <div
+              className="relative flex items-center gap-2"
+              onClick={toggleDropdown}
+              role="button"
+              aria-haspopup="true"
+              aria-expanded={dropdownOpen}
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && toggleDropdown()}
+            >
+              <span className="inline-block cursor-pointer text-base font-bold text-white">
+                {`Hello, ${user.firstName || 'User'}`}
+              </span>
+              <img
+                src={user.profilePicture || DEFAULT_AVATAR}
+                alt="Profile picture"
+                className="h-7 w-7 overflow-hidden rounded-full"
+              />
+              <FaChevronDown
+                className={`h-4 w-4 text-white transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
+                onClick={toggleDropdown}
+              />
+              <Dropdown
+                isOpen={dropdownOpen}
+                onClose={handleCloseDropdown}
+                onSignOut={handleSignOut}
+              />
+            </div>
+          )}
         </div>
       </div>
     </nav>

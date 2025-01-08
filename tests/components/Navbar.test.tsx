@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Navbar from '../../src/components/navbar';
+import Navbar from '../../src/components/Navbar';
+import { AuthProvider } from '../../src/context/AuthContext';
+import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect, vi } from 'vitest';
 
 vi.mock('../../src/config', () => ({
@@ -13,7 +15,13 @@ vi.mock('../../src/config', () => ({
 
 describe('Navbar Component', () => {
   it('should render the navbar with correct links', () => {
-    render(<Navbar />);
+    render(
+      <BrowserRouter>
+        <AuthProvider>
+          <Navbar />
+        </AuthProvider>
+      </BrowserRouter>,
+    );
 
     expect(screen.getByLabelText(/Home/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Go to Welcome site/i)).toBeInTheDocument();
@@ -22,7 +30,13 @@ describe('Navbar Component', () => {
   });
 
   it('should have links opening in a new tab', () => {
-    render(<Navbar />);
+    render(
+      <BrowserRouter>
+        <AuthProvider>
+          <Navbar />
+        </AuthProvider>
+      </BrowserRouter>,
+    );
 
     expect(screen.getByTestId('navbar-home-link')).toBeInTheDocument();
     expect(screen.getByTestId('navbar-welcome-link')).toBeInTheDocument();
