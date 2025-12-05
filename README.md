@@ -11,21 +11,88 @@ To use this project locally, follow these steps:
 
 ### Prerequisites
 
-- Ensure you have [Node.js](https://nodejs.org/) installed on your machine.
+- Ensure you have [Node.js](https://nodejs.org/) (v22.11.0 or compatible) installed on your machine.
 - Install [Git](https://git-scm.com/) for version control.
+- This project uses **pnpm** (v10.24.0) as the package manager.
 
-### Installation
+### Package Manager Setup
 
-1. **Clone the repository**:
+This project pins specific versions of Node.js and pnpm for consistency. Choose one of the following methods:
+
+#### Option 1: Using Corepack (Recommended)
+
+[Corepack](https://nodejs.org/api/corepack.html) is included with Node.js and is the recommended way to manage package manager versions.
+
+1. **Enable Corepack**:
+   ```bash
+   corepack enable
+   ```
+
+2. **Clone the repository**:
    ```bash
    git clone https://github.com/Real-Dev-Squad/feature-flag-frontend.git
    cd feature-flag-frontend
    ```
 
-2. **Install dependencies**:
+3. **Corepack will automatically use the pinned pnpm version** from `package.json`:
    ```bash
    pnpm install
    ```
+
+#### Option 2: Using Volta
+
+If you use [Volta](https://volta.sh/) for tool management:
+
+1. **Enable pnpm support in Volta** (pnpm support is experimental):
+   ```bash
+   export VOLTA_FEATURE_PNPM=1
+   ```
+
+   Add this to your shell profile (`.zshrc`, `.bashrc`, etc.) to make it persistent:
+   ```bash
+   echo 'export VOLTA_FEATURE_PNPM=1' >> ~/.zshrc  # or ~/.bashrc
+   source ~/.zshrc
+   ```
+
+2. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Real-Dev-Squad/feature-flag-frontend.git
+   cd feature-flag-frontend
+   ```
+
+3. **Volta will automatically use the pinned versions** from `package.json`:
+   ```bash
+   pnpm install
+   ```
+
+#### Option 3: Manual Installation
+
+If you prefer to install pnpm manually:
+
+1. **Install pnpm globally**:
+   ```bash
+   npm install -g pnpm@10.24.0
+   ```
+
+2. **Verify the version**:
+   ```bash
+   pnpm --version  # Should output 10.24.0
+   ```
+
+3. **Clone and install**:
+   ```bash
+   git clone https://github.com/Real-Dev-Squad/feature-flag-frontend.git
+   cd feature-flag-frontend
+   pnpm install
+   ```
+
+### Installation
+
+After setting up the package manager, install dependencies:
+
+```bash
+pnpm install
+```
 
 ### Running the Project
 

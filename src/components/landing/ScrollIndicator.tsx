@@ -20,7 +20,7 @@ export const ScrollIndicator = () => {
       data-testid="scroll-indicator"
     >
       <svg
-        className="h-6 w-6 text-secondary-light"
+        className="text-secondary-light h-6 w-6"
         fill="none"
         strokeWidth="2"
         viewBox="0 0 24 24"
