@@ -26,7 +26,7 @@ const Landing = () => {
       >
         <div className="max-w-4xl">
           <h1
-            className="mb-4 bg-gradient-to-r from-primary to-primary-light bg-clip-text pb-1 text-5xl font-bold text-transparent md:text-6xl"
+            className="from-primary to-primary-light mb-4 bg-gradient-to-r bg-clip-text pb-1 text-5xl font-bold text-transparent md:text-6xl"
             data-testid="hero-title"
           >
             Welcome to Feature-Flag
@@ -35,9 +35,9 @@ const Landing = () => {
             className="flex items-center justify-center gap-3"
             aria-label="Created by Real Dev Squad"
           >
-            <span className="text-lg text-secondary-light">by</span>
+            <span className="text-secondary-light text-lg">by</span>
             <img src={RDSLogo} alt="RDS Logo" className="h-10 w-auto" />
-            <span className="text-lg text-secondary-light">Real Dev Squad</span>
+            <span className="text-secondary-light text-lg">Real Dev Squad</span>
           </div>
         </div>
         <ScrollIndicator />
@@ -110,7 +110,7 @@ const Landing = () => {
         </div>
       </motion.section>
       <motion.footer
-        className="bg-gradient-to-r from-primary to-primary-light py-12 text-white"
+        className="from-primary to-primary-light bg-gradient-to-r py-12 text-white"
         {...fadeInViewportAnimation}
         role="contentinfo"
         data-testid="footer"
@@ -122,7 +122,7 @@ const Landing = () => {
               href="https://github.com/Real-Dev-Squad/feature-flag-frontend"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-b border-white hover:border-accent hover:text-accent"
+              className="hover:border-accent hover:text-accent border-b border-white"
               data-testid="repo-link"
             >
               repo

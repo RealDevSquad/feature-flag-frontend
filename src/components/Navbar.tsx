@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className="fixed left-0 top-0 z-50 w-full border-b border-gray-100 bg-primary p-2"
+      className="bg-primary fixed top-0 left-0 z-50 w-full border-b border-gray-100 p-2"
       aria-label="Main Navigation"
       data-testid="navbar"
     >
@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-6">
           <a
             href={welcomeSiteUrl}
-            className="text-white hover:text-accent"
+            className="hover:text-accent text-white"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Go to Welcome site"
@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
           </a>
           <a
             href={membersSiteUrl}
-            className="text-white hover:text-accent"
+            className="hover:text-accent text-white"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Go to Members site"
@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
           </a>
           <a
             href={statusSiteUrl}
-            className="text-white hover:text-accent"
+            className="hover:text-accent text-white"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Go to Status site"

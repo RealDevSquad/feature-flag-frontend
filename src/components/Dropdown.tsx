@@ -41,7 +41,7 @@ const Dropdown: React.FC<DropdownProps> = ({ isOpen, onClose, onSignOut }) => {
   return (
     <div
       ref={dropdownRef}
-      className="absolute right-0 top-full z-10 mt-2 w-48 rounded-md bg-white shadow-lg"
+      className="absolute top-full right-0 z-10 mt-2 w-48 rounded-md bg-white shadow-lg"
       role="menu"
       aria-label="User menu"
       style={{
